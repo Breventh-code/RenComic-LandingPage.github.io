@@ -3,77 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RenComic — Portal Komik Online</title>
+  <title>RenComic — Baca Komik Online</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#070811;
-      --surface:#10121f;
-      --surface2:#16192a;
-      --surface3:#1c2034;
+      --bg:#07080c;
+      --panel:#101218;
+      --panel-2:#161923;
+      --panel-3:#202432;
       --line:rgba(255,255,255,.08);
-      --text:#f4f4fb;
-      --muted:#a8a8ba;
-      --soft:#7d8094;
-      --red:#ff3d47;
-      --orange:#ff6b2d;
-      --yellow:#ffd35d;
-      --blue:#7e91ff;
-      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --text:#f5f5f7;
+      --muted:#a3a7b5;
+      --soft:#747988;
+      --primary:#e8313c;
+      --primary-2:#ff6b3a;
+      --accent:#f5c84b;
+      --shadow:0 22px 60px rgba(0,0,0,.42);
       --radius:18px;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{
-      font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
+      min-height:100vh;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(255,61,71,.14), transparent 28rem),
-        radial-gradient(circle at top right, rgba(126,145,255,.12), transparent 25rem),
-        #070811;
+        radial-gradient(circle at 18% 0%, rgba(232,49,60,.16), transparent 28rem),
+        radial-gradient(circle at 86% 8%, rgba(255,107,58,.10), transparent 24rem),
+        linear-gradient(180deg,#080910 0%,#07080c 54%,#05060a 100%);
       color:var(--text);
       overflow-x:hidden;
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.08;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      z-index:0;
-    }
-
-    a{text-decoration:none;color:inherit}
-    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
     button,input{font:inherit}
+    img{display:block;max-width:100%}
 
     .container{
-      width:min(1240px,92vw);
+      width:min(1180px,92vw);
       margin:auto;
       position:relative;
       z-index:1;
     }
 
     .topbar{
-      background:linear-gradient(90deg,var(--red),var(--orange));
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:#0b0c12;
+      color:#b8bdc9;
       overflow:hidden;
       white-space:nowrap;
       font-size:12px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:#fff;
+      font-weight:700;
     }
+
     .ticker{
       display:flex;
-      gap:36px;
-      padding:8px 0;
-      animation:ticker 28s linear infinite;
+      gap:42px;
+      padding:9px 0;
+      animation:ticker 34s linear infinite;
     }
+
+    .ticker span{
+      position:relative;
+      padding-left:14px;
+    }
+
+    .ticker span::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:50%;
+      width:5px;
+      height:5px;
+      border-radius:999px;
+      background:var(--primary);
+      transform:translateY(-50%);
+    }
+
     @keyframes ticker{
       from{transform:translateX(0)}
       to{transform:translateX(-50%)}
@@ -84,162 +92,238 @@
       top:0;
       z-index:80;
       border-bottom:1px solid var(--line);
-      background:rgba(8,10,18,.9);
+      background:rgba(7,8,12,.86);
       backdrop-filter:blur(18px);
     }
+
     .nav{
-      min-height:74px;
+      min-height:76px;
       display:flex;
       align-items:center;
-      gap:24px;
-      flex-wrap:wrap;
-      padding:10px 0;
+      gap:22px;
+      padding:12px 0;
     }
+
     .brand{
-      font-family:"Bebas Neue",sans-serif;
-      font-size:38px;
-      letter-spacing:.08em;
+      display:flex;
+      align-items:center;
+      gap:11px;
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
       flex-shrink:0;
     }
-    .brand span{color:var(--red)}
+
+    .brand-mark{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      box-shadow:0 12px 30px rgba(232,49,60,.25);
+      position:relative;
+    }
+
+    .brand-mark::after{
+      content:"";
+      position:absolute;
+      inset:9px;
+      border:2px solid rgba(255,255,255,.75);
+      border-radius:7px;
+    }
+
+    .brand span{color:#fff}
+
     .nav-links{
       display:flex;
       gap:4px;
       flex:1;
-      min-width:0;
       align-items:center;
+      min-width:0;
     }
+
     .nav-links a{
       color:var(--muted);
       font-size:13px;
-      font-weight:900;
-      padding:12px 16px;
+      font-weight:800;
+      padding:11px 14px;
       border-radius:999px;
-      transition:.2s;
+      transition:.2s ease;
     }
-    .nav-links a:hover,.nav-links a.active{
+
+    .nav-links a:hover,
+    .nav-links a.active{
       color:#fff;
-      background:var(--surface2);
+      background:var(--panel-2);
     }
 
     .search{
       width:250px;
+      min-width:210px;
       display:flex;
       align-items:center;
       gap:10px;
-      background:var(--surface2);
+      background:rgba(255,255,255,.045);
       border:1px solid var(--line);
       border-radius:999px;
       padding:10px 14px;
     }
+
+    .search-icon{
+      width:14px;
+      height:14px;
+      border:2px solid #c5cad6;
+      border-radius:50%;
+      position:relative;
+      flex-shrink:0;
+      opacity:.7;
+    }
+
+    .search-icon::after{
+      content:"";
+      position:absolute;
+      width:7px;
+      height:2px;
+      right:-6px;
+      bottom:-4px;
+      border-radius:999px;
+      background:#c5cad6;
+      transform:rotate(45deg);
+    }
+
     .search input{
       width:100%;
-      background:transparent;
       border:0;
       outline:0;
+      background:transparent;
       color:#fff;
       font-size:13px;
     }
+
     .search input::placeholder{color:var(--soft)}
 
     .login{
       border:0;
-      background:linear-gradient(135deg,var(--red),var(--orange));
-      color:#fff;
-      padding:12px 18px;
+      background:#fff;
+      color:#0a0b10;
+      padding:11px 18px;
       border-radius:999px;
+      font-size:13px;
       font-weight:900;
       cursor:pointer;
-      box-shadow:0 8px 24px rgba(255,61,71,.25);
+      transition:.2s ease;
+    }
+
+    .login:hover{
+      transform:translateY(-1px);
+      background:#f2f3f6;
     }
 
     .hero{
       position:relative;
-      min-height:590px;
+      min-height:610px;
       overflow:hidden;
       border-bottom:1px solid var(--line);
     }
+
     .hero-media{
       position:absolute;
       inset:0;
       overflow:hidden;
     }
+
     .hero-media img{
       width:100%;
       height:100%;
       object-fit:cover;
-      filter:brightness(.4) saturate(1.1);
-      transform:scale(1.06);
+      filter:brightness(.38) saturate(1.05);
+      transform:scale(1.04);
     }
+
     .hero-overlay{
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(90deg, rgba(6,8,14,.96) 0%, rgba(6,8,14,.78) 42%, rgba(6,8,14,.28) 100%),
-        linear-gradient(180deg, transparent 0%, rgba(6,8,14,.55) 65%, rgba(6,8,14,1) 100%);
       z-index:1;
+      background:
+        linear-gradient(90deg,rgba(7,8,12,.98) 0%,rgba(7,8,12,.84) 42%,rgba(7,8,12,.34) 100%),
+        linear-gradient(180deg,rgba(7,8,12,.18) 0%,rgba(7,8,12,.6) 64%,#07080c 100%);
     }
 
     .hero-inner{
       position:relative;
       z-index:2;
-      min-height:590px;
+      min-height:610px;
       display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:36px;
+      grid-template-columns:minmax(0,1fr) 510px;
+      gap:44px;
       align-items:end;
-      padding:70px 0 64px;
+      padding:78px 0 66px;
     }
 
-    .eyebrow{
+    .label{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      background:rgba(255,211,93,.12);
-      color:var(--yellow);
-      border:1px solid rgba(255,211,93,.24);
+      margin-bottom:18px;
       padding:8px 12px;
+      border:1px solid rgba(245,200,75,.25);
       border-radius:999px;
+      background:rgba(245,200,75,.10);
+      color:#f3d67b;
       font-size:12px;
       font-weight:900;
+      letter-spacing:.09em;
       text-transform:uppercase;
-      letter-spacing:.1em;
-      margin-bottom:18px;
+    }
+
+    .label::before{
+      content:"";
+      width:6px;
+      height:6px;
+      border-radius:999px;
+      background:var(--accent);
+      box-shadow:0 0 18px rgba(245,200,75,.75);
     }
 
     .hero-copy h1{
-      font-family:"Bebas Neue",sans-serif;
-      font-size:clamp(60px,8vw,110px);
-      line-height:.86;
-      letter-spacing:.04em;
-      margin-bottom:14px;
+      max-width:780px;
+      font-size:clamp(52px,7vw,94px);
+      line-height:.94;
+      letter-spacing:-.06em;
+      margin-bottom:18px;
     }
-    .hero-copy h1 span{color:var(--red)}
+
+    .hero-copy h1 span{color:var(--primary)}
+
     .hero-meta{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
-      margin-bottom:18px;
+      margin-bottom:20px;
     }
+
     .pill{
       padding:7px 10px;
       border-radius:999px;
-      background:rgba(255,255,255,.08);
       border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:#e7e9ef;
       font-size:12px;
       font-weight:800;
     }
+
     .pill.red{
-      background:rgba(255,61,71,.12);
-      color:#ff98a0;
-      border-color:rgba(255,61,71,.25);
+      color:#ffb4ba;
+      background:rgba(232,49,60,.14);
+      border-color:rgba(232,49,60,.28);
     }
+
     .hero-copy p{
-      max-width:620px;
-      color:#d8d8e5;
+      max-width:650px;
+      margin-bottom:26px;
+      color:#d1d4dd;
       line-height:1.85;
       font-size:15px;
-      margin-bottom:24px;
     }
 
     .actions{
@@ -247,72 +331,89 @@
       gap:12px;
       flex-wrap:wrap;
     }
+
     .btn{
       border:1px solid var(--line);
-      background:var(--surface2);
+      background:rgba(255,255,255,.06);
       color:#fff;
       padding:14px 18px;
-      border-radius:16px;
+      border-radius:14px;
       font-weight:900;
       cursor:pointer;
-      transition:.2s;
+      transition:.2s ease;
     }
+
     .btn.primary{
       border-color:transparent;
-      background:linear-gradient(135deg,var(--red),var(--orange));
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      box-shadow:0 12px 32px rgba(232,49,60,.25);
     }
+
     .btn:hover{transform:translateY(-2px)}
 
     .spotlight{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
+      grid-template-columns:1fr;
       gap:14px;
       align-self:center;
     }
 
     .mini-card{
-      position:relative;
-      min-height:220px;
-      border-radius:24px;
-      overflow:hidden;
+      display:grid;
+      grid-template-columns:108px 1fr;
+      gap:14px;
+      align-items:center;
+      min-height:128px;
+      padding:12px;
       border:1px solid var(--line);
-      background:var(--surface2);
-      cursor:pointer;
+      border-radius:22px;
+      background:rgba(16,18,24,.72);
       box-shadow:var(--shadow);
-      transition:.25s;
-    }
-    .mini-card:hover{
-      transform:translateY(-6px);
-      border-color:rgba(255,61,71,.35);
-    }
-    .mini-card img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-    .mini-overlay{
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg,transparent 28%,rgba(0,0,0,.88) 100%);
-      display:flex;
-      align-items:flex-end;
-      padding:16px;
-    }
-    .mini-overlay small{
-      color:#f0f0f6;
-      display:block;
-      font-size:11px;
-      font-weight:800;
-      margin-bottom:6px;
-    }
-    .mini-overlay h3{
-      font-family:"Bebas Neue",sans-serif;
-      font-size:34px;
-      line-height:.95;
-      letter-spacing:.03em;
+      cursor:pointer;
+      transition:.22s ease;
+      backdrop-filter:blur(14px);
     }
 
-    section{padding:42px 0}
+    .mini-card:hover{
+      transform:translateX(-4px);
+      border-color:rgba(232,49,60,.38);
+      background:rgba(22,25,35,.84);
+    }
+
+    .mini-card img{
+      width:108px;
+      height:142px;
+      object-fit:cover;
+      border-radius:16px;
+    }
+
+    .mini-content small{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      display:block;
+      margin-bottom:8px;
+    }
+
+    .mini-content h3{
+      font-size:23px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+      margin-bottom:10px;
+    }
+
+    .mini-content p{
+      color:#b8bdc9;
+      font-size:13px;
+      line-height:1.6;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    section{padding:46px 0}
+
     .section-head{
       display:flex;
       align-items:end;
@@ -320,45 +421,58 @@
       gap:16px;
       margin-bottom:22px;
     }
+
     .section-title{
-      font-family:"Bebas Neue",sans-serif;
-      font-size:42px;
-      letter-spacing:.05em;
+      font-size:34px;
+      line-height:1;
+      letter-spacing:-.05em;
     }
-    .section-title span{color:var(--red)}
+
+    .section-title span{color:var(--primary)}
+
     .section-sub{
+      margin-top:8px;
       color:var(--muted);
       font-size:14px;
-      margin-top:4px;
     }
+
     .viewall{
       color:var(--muted);
       font-size:13px;
       font-weight:900;
     }
+
     .viewall:hover{color:#fff}
 
     .genres{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-bottom:22px;
+      margin-bottom:24px;
     }
+
     .genre{
       border:1px solid var(--line);
-      background:var(--surface2);
+      background:rgba(255,255,255,.045);
       color:var(--muted);
       padding:10px 14px;
       border-radius:999px;
       font-size:13px;
-      font-weight:900;
+      font-weight:850;
       cursor:pointer;
-      transition:.2s;
+      transition:.18s ease;
     }
-    .genre:hover,.genre.active{
+
+    .genre:hover,
+    .genre.active{
       color:#fff;
-      background:var(--red);
-      border-color:var(--red);
+      background:var(--panel-3);
+      border-color:rgba(255,255,255,.14);
+    }
+
+    .genre.active{
+      background:var(--primary);
+      border-color:var(--primary);
     }
 
     .grid{
@@ -369,81 +483,91 @@
 
     .card{
       cursor:pointer;
-      transition:.25s;
+      transition:.22s ease;
     }
-    .card:hover{transform:translateY(-6px)}
+
+    .card:hover{transform:translateY(-5px)}
+
     .cover{
       aspect-ratio:2/3;
       position:relative;
-      border-radius:20px;
-      overflow:hidden;
-      background:var(--surface2);
       border:1px solid var(--line);
-      box-shadow:0 16px 36px rgba(0,0,0,.35);
+      border-radius:18px;
+      overflow:hidden;
+      background:var(--panel);
+      box-shadow:0 18px 38px rgba(0,0,0,.32);
     }
+
     .cover img{
       width:100%;
       height:100%;
       object-fit:cover;
-      transition:.25s;
+      transition:.25s ease;
     }
+
     .card:hover .cover img{
-      transform:scale(1.05);
-      filter:brightness(.8);
+      transform:scale(1.045);
+      filter:brightness(.82);
     }
+
     .badge{
       position:absolute;
       top:12px;
       left:12px;
-      background:var(--red);
-      color:#fff;
-      font-size:11px;
-      font-weight:900;
-      padding:7px 10px;
-      border-radius:999px;
-      text-transform:uppercase;
       z-index:2;
+      padding:6px 9px;
+      border-radius:999px;
+      background:#fff;
+      color:#11131a;
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.05em;
+      text-transform:uppercase;
     }
+
     .chapter{
       position:absolute;
       left:12px;
       right:12px;
       bottom:12px;
-      background:rgba(14,14,22,.78);
-      border:1px solid rgba(255,255,255,.12);
-      color:#fff;
-      border-radius:16px;
-      padding:10px 12px;
-      font-weight:900;
-      font-size:12px;
-      backdrop-filter:blur(10px);
       z-index:2;
+      padding:10px 11px;
+      border:1px solid rgba(255,255,255,.13);
+      border-radius:14px;
+      background:rgba(9,10,14,.72);
+      color:#fff;
+      font-size:12px;
+      font-weight:900;
+      backdrop-filter:blur(10px);
     }
+
     .card h3{
-      font-size:15px;
-      line-height:1.4;
-      margin-top:10px;
       min-height:42px;
+      margin-top:11px;
+      font-size:15px;
+      line-height:1.35;
+      letter-spacing:-.02em;
       display:-webkit-box;
       -webkit-line-clamp:2;
       -webkit-box-orient:vertical;
       overflow:hidden;
     }
+
     .card-info{
       display:flex;
       justify-content:space-between;
       gap:8px;
+      margin-top:7px;
       color:var(--muted);
       font-size:12px;
       font-weight:800;
-      margin-top:6px;
     }
 
     .layout{
       display:grid;
       grid-template-columns:minmax(0,1fr) 350px;
       gap:28px;
-      padding-bottom:56px;
+      padding-bottom:58px;
     }
 
     .updates{
@@ -451,20 +575,23 @@
       grid-template-columns:repeat(2,1fr);
       gap:14px;
     }
+
     .update{
       display:flex;
       gap:14px;
       padding:13px;
       border:1px solid var(--line);
       border-radius:18px;
-      background:rgba(16,18,31,.82);
+      background:rgba(16,18,24,.78);
       cursor:pointer;
-      transition:.2s;
+      transition:.2s ease;
     }
+
     .update:hover{
-      background:var(--surface2);
-      border-color:rgba(255,61,71,.32);
+      background:var(--panel-2);
+      border-color:rgba(232,49,60,.32);
     }
+
     .update img{
       width:72px;
       height:96px;
@@ -472,34 +599,52 @@
       border-radius:12px;
       flex-shrink:0;
     }
-    .update h3{font-size:15px;margin-bottom:4px}
+
+    .update h3{
+      font-size:15px;
+      margin-bottom:5px;
+      letter-spacing:-.02em;
+    }
+
     .update p{
+      margin-bottom:10px;
       color:var(--muted);
       font-size:12px;
       font-weight:700;
-      margin-bottom:10px;
     }
-    .chapters{display:flex;flex-direction:column;gap:6px}
+
+    .chapters{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
     .chapters span{
       display:flex;
       justify-content:space-between;
       gap:10px;
-      font-size:12px;
-      font-weight:900;
       color:#fff;
+      font-size:12px;
+      font-weight:850;
     }
-    .chapters em{font-style:normal;color:var(--soft)}
+
+    .chapters em{
+      color:var(--soft);
+      font-style:normal;
+      white-space:nowrap;
+    }
 
     aside{
       position:sticky;
       top:96px;
       height:max-content;
-      border:1px solid var(--line);
-      background:rgba(16,18,31,.82);
-      backdrop-filter:blur(16px);
-      border-radius:24px;
       padding:18px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(16,18,24,.78);
+      backdrop-filter:blur(16px);
     }
+
     .rank{
       display:flex;
       align-items:center;
@@ -508,17 +653,21 @@
       border-bottom:1px solid var(--line);
       cursor:pointer;
     }
+
     .rank:last-child{border-bottom:0}
+
     .rank-num{
-      width:34px;
-      font-family:"Bebas Neue",sans-serif;
-      font-size:28px;
-      text-align:center;
+      width:32px;
       color:var(--soft);
+      font-size:18px;
+      font-weight:900;
+      text-align:center;
     }
-    .rank:nth-child(1) .rank-num{color:var(--yellow)}
-    .rank:nth-child(2) .rank-num{color:#d9dde8}
+
+    .rank:nth-child(1) .rank-num{color:var(--accent)}
+    .rank:nth-child(2) .rank-num{color:#e4e6ee}
     .rank:nth-child(3) .rank-num{color:#d28757}
+
     .rank img{
       width:48px;
       height:64px;
@@ -526,12 +675,15 @@
       border-radius:10px;
       flex-shrink:0;
     }
+
     .rank h3{
       font-size:14px;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      letter-spacing:-.02em;
     }
+
     .rank small{
       color:var(--muted);
       font-size:11px;
@@ -543,14 +695,15 @@
       grid-template-columns:.95fr 1.05fr;
       gap:28px;
       align-items:center;
-      background:
-        linear-gradient(135deg,rgba(255,61,71,.08),transparent 35%),
-        var(--surface);
+      padding:26px;
       border:1px solid var(--line);
       border-radius:28px;
+      background:
+        linear-gradient(135deg,rgba(232,49,60,.08),transparent 35%),
+        var(--panel);
       overflow:hidden;
-      padding:26px;
     }
+
     .reader img{
       width:100%;
       max-height:420px;
@@ -558,82 +711,110 @@
       border-radius:22px;
       box-shadow:var(--shadow);
     }
+
     .reader h2{
-      font-family:"Bebas Neue",sans-serif;
-      font-size:56px;
-      line-height:.95;
       margin-bottom:14px;
+      font-size:42px;
+      line-height:1;
+      letter-spacing:-.06em;
     }
+
     .reader p{
+      margin-bottom:18px;
       color:var(--muted);
       line-height:1.85;
-      margin-bottom:18px;
     }
 
     .footer{
+      padding:38px 0;
       border-top:1px solid var(--line);
-      background:#0a0b13;
-      padding:36px 0;
+      background:#08090e;
       color:var(--muted);
     }
+
     .footer-grid{
       display:grid;
       grid-template-columns:2fr 1fr 1fr 1fr;
       gap:26px;
     }
-    .footer h4{color:#fff;margin-bottom:12px}
+
+    .footer h4{
+      margin-bottom:12px;
+      color:#fff;
+    }
+
     .footer a{
       display:block;
-      color:var(--muted);
       margin:8px 0;
+      color:var(--muted);
       font-size:13px;
     }
+
     .footer a:hover{color:#fff}
+
     .copyright{
-      border-top:1px solid var(--line);
       margin-top:28px;
       padding-top:18px;
+      border-top:1px solid var(--line);
       font-size:13px;
     }
 
     .toast{
       position:fixed;
-      top:90px;
+      top:92px;
       right:24px;
       z-index:99;
       transform:translateX(140%);
-      transition:.25s;
-      background:var(--surface2);
-      border:1px solid var(--line);
-      box-shadow:var(--shadow);
-      color:#fff;
+      transition:.25s ease;
       padding:12px 16px;
+      border:1px solid var(--line);
       border-radius:14px;
+      background:var(--panel-2);
+      color:#fff;
+      box-shadow:var(--shadow);
       font-size:13px;
-      font-weight:900;
+      font-weight:850;
     }
+
     .toast.show{transform:translateX(0)}
 
     @media(max-width:1100px){
-      .hero-inner,.layout,.reader{grid-template-columns:1fr}
-      .spotlight{grid-template-columns:repeat(3,1fr)}
+      .hero-inner,
+      .layout,
+      .reader{grid-template-columns:1fr}
+
+      .spotlight{
+        grid-template-columns:repeat(3,1fr);
+      }
+
+      .mini-card{
+        grid-template-columns:1fr;
+        min-height:auto;
+      }
+
+      .mini-card img{
+        width:100%;
+        height:210px;
+      }
+
       .grid{grid-template-columns:repeat(4,1fr)}
       .updates{grid-template-columns:1fr}
       aside{position:relative;top:0}
     }
 
     @media(max-width:760px){
+      .nav{gap:12px}
+      .brand{font-size:20px}
       .nav-links{order:3;width:100%;overflow:auto}
       .search{width:100%;order:4}
+      .login{display:none}
       .hero{min-height:auto}
       .hero-inner{min-height:auto;padding:48px 0}
       .spotlight{grid-template-columns:1fr}
-      .mini-card{min-height:150px}
       .grid{grid-template-columns:repeat(2,1fr);gap:14px}
       .footer-grid{grid-template-columns:1fr 1fr}
-      .reader h2{font-size:42px}
-      .section-title{font-size:34px}
-      .login{display:none}
+      .reader h2{font-size:34px}
+      .section-title{font-size:30px}
     }
   </style>
 </head>
@@ -645,7 +826,7 @@
 
   <header>
     <div class="container nav">
-      <a href="#" class="brand"><span>REN</span>COMIC</a>
+      <a href="#" class="brand"><span class="brand-mark"></span><span>RenComic</span></a>
 
       <nav class="nav-links">
         <a href="#" class="active">Home</a>
@@ -656,8 +837,8 @@
       </nav>
 
       <label class="search">
-        🔎
-        <input id="searchInput" type="search" placeholder="Cari judul, genre, tipe..." />
+        <span class="search-icon"></span>
+        <input id="searchInput" type="search" placeholder="Cari judul atau genre" />
       </label>
 
       <button class="login" onclick="toast('Mode demo: login belum dihubungkan')">Login</button>
@@ -671,15 +852,15 @@
 
       <div class="container hero-inner">
         <div class="hero-copy">
-          <div class="eyebrow">★ Featured Minggu Ini</div>
+          <div class="label">Featured Minggu Ini</div>
           <h1 id="heroTitle">Solo <span>Leveling</span></h1>
           <div class="hero-meta" id="heroMeta"></div>
           <p id="heroDesc">
             Hunter terlemah bangkit menjadi kekuatan paling berbahaya setelah menemukan sistem misterius di dalam dungeon.
           </p>
           <div class="actions">
-            <button class="btn primary" onclick="toast('Membuka chapter demo...')">▶ Baca Sekarang</button>
-            <button class="btn" onclick="toast('Ditambahkan ke bookmark')">📌 Simpan</button>
+            <button class="btn primary" onclick="toast('Membuka chapter demo')">Baca Sekarang</button>
+            <button class="btn" onclick="toast('Ditambahkan ke daftar simpan')">Simpan Judul</button>
           </div>
         </div>
 
@@ -692,9 +873,9 @@
         <div class="section-head">
           <div>
             <h2 class="section-title">Trending <span>Komik</span></h2>
-            <p class="section-sub">Gambar memakai URL yang lebih aman, dan tetap memiliki fallback otomatis.</p>
+            <p class="section-sub">Pilihan manga, manhwa, dan manhua populer dengan tampilan katalog yang bersih.</p>
           </div>
-          <a href="#" class="viewall">Lihat Semua →</a>
+          <a href="#" class="viewall">Lihat Semua</a>
         </div>
 
         <div class="genres" id="genreTabs"></div>
@@ -707,15 +888,15 @@
         <div class="reader">
           <img
             src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=900&q=80"
-            alt="Reader Preview"
-            onerror="this.src=createFallbackPoster('Reader Mode', '#1d2447', '#ff4c5b')"
+            alt="Preview reader komik"
+            onerror="this.src=createFallbackPoster('Reader Mode', '#151925', '#e8313c')"
           />
           <div>
-            <div class="eyebrow">Mode Reader</div>
-            <h2>Baca Komik Lebih Nyaman</h2>
+            <div class="label">Mode Reader</div>
+            <h2>Baca Lebih Fokus</h2>
             <p>
-              Tampilan reader dibuat gelap, bersih, dan fokus ke konten. Cocok untuk halaman detail chapter,
-              daftar episode, bookmark, history baca, dan rekomendasi komik sejenis.
+              Area reader dibuat sederhana agar pengguna lebih fokus ke konten. Cocok untuk halaman chapter,
+              daftar episode, bookmark, histori baca, dan rekomendasi judul sejenis.
             </p>
             <button class="btn primary" onclick="toast('Reader demo dibuka')">Coba Reader</button>
           </div>
@@ -729,7 +910,7 @@
           <div class="section-head">
             <div>
               <h2 class="section-title">Update <span>Terbaru</span></h2>
-              <p class="section-sub">Format list chapter seperti portal komik online.</p>
+              <p class="section-sub">Daftar chapter terbaru dengan format ringkas dan mudah dipindai.</p>
             </div>
           </div>
 
@@ -739,7 +920,7 @@
         <aside id="popular">
           <div class="section-head" style="margin-bottom:8px">
             <div>
-              <h2 class="section-title" style="font-size:32px">Top <span>10</span></h2>
+              <h2 class="section-title" style="font-size:30px">Top <span>10</span></h2>
               <p class="section-sub">Ranking mingguan.</p>
             </div>
           </div>
@@ -753,10 +934,9 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="brand"><span>REN</span>COMIC</div>
-          <p>
-            Portal baca komik online bertema gelap dengan katalog manga, manhwa, manhua, update chapter,
-            popularitas, genre, dan pengalaman baca yang rapi.
+          <a href="#" class="brand"><span class="brand-mark"></span><span>RenComic</span></a>
+          <p style="margin-top:14px;line-height:1.8">
+            Portal katalog komik online bertema gelap dengan daftar judul, genre, update chapter, ranking, dan pengalaman baca yang rapi.
           </p>
         </div>
         <div>
@@ -769,7 +949,7 @@
           <h4>Genre</h4>
           <a href="#">Action</a>
           <a href="#">Fantasy</a>
-          <a href="#">Romance</a>
+          <a href="#">Adventure</a>
         </div>
         <div>
           <h4>Info</h4>
@@ -780,7 +960,7 @@
       </div>
 
       <div class="copyright">
-        © 2026 RenComic — Muhammad Rendy Breventa Brahmana. Jika URL gambar gagal, sistem otomatis menampilkan poster cadangan.
+        © 2026 RenComic — Muhammad Rendy Breventa Brahmana. Website demo untuk kebutuhan antarmuka katalog komik.
       </div>
     </div>
   </footer>
@@ -788,7 +968,7 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    function createFallbackPoster(title, colorA = "#1f264e", colorB = "#ff4b5a"){
+    function createFallbackPoster(title, colorA = "#151925", colorB = "#e8313c"){
       const safeTitle = title.toUpperCase().replace(/&/g, "&amp;");
       const svg = `
         <svg xmlns="http://www.w3.org/2000/svg" width="800" height="1200" viewBox="0 0 800 1200">
@@ -799,11 +979,12 @@
             </linearGradient>
           </defs>
           <rect width="100%" height="100%" fill="url(#g)"/>
-          <circle cx="640" cy="160" r="180" fill="rgba(255,255,255,.08)"/>
-          <circle cx="180" cy="980" r="220" fill="rgba(255,255,255,.06)"/>
-          <text x="70" y="120" fill="white" font-size="44" font-family="Arial" font-weight="800">RENCOMIC</text>
-          <text x="70" y="930" fill="white" font-size="80" font-family="Arial" font-weight="900">${safeTitle}</text>
-          <text x="70" y="1010" fill="rgba(255,255,255,.85)" font-size="34" font-family="Arial" font-weight="700">Poster Cadangan</text>
+          <rect x="52" y="52" width="696" height="1096" rx="46" fill="rgba(255,255,255,.055)" stroke="rgba(255,255,255,.16)"/>
+          <circle cx="642" cy="184" r="150" fill="rgba(255,255,255,.07)"/>
+          <circle cx="160" cy="1000" r="190" fill="rgba(0,0,0,.13)"/>
+          <text x="72" y="126" fill="white" font-size="38" font-family="Arial" font-weight="800" letter-spacing="8">RENCOMIC</text>
+          <text x="72" y="905" fill="white" font-size="74" font-family="Arial" font-weight="900">${safeTitle}</text>
+          <text x="72" y="976" fill="rgba(255,255,255,.82)" font-size="30" font-family="Arial" font-weight="700">Poster cadangan</text>
         </svg>
       `;
       return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
@@ -968,7 +1149,7 @@
     }
 
     function heroImage(src, title){
-      const safe = createFallbackPoster(title, "#111833", "#ff4c5f");
+      const safe = createFallbackPoster(title, "#151925", "#e8313c");
       return `<img src="${src}" alt="${title}" onerror="this.onerror=null;this.src='${safe}'">`;
     }
 
@@ -994,25 +1175,24 @@
         <span class="pill">${comic.type}</span>
         <span class="pill">${comic.genre}</span>
         <span class="pill">${comic.chapter}</span>
-        <span class="pill">★ ${comic.rating}</span>
+        <span class="pill">Rating ${comic.rating}</span>
       `;
       heroDesc.textContent = comic.desc;
     }
 
     function renderTicker(){
       const repeated = [...tickerItems, ...tickerItems, ...tickerItems];
-      document.getElementById("ticker").innerHTML = repeated.map(item => `<span>◆ ${item}</span>`).join("");
+      document.getElementById("ticker").innerHTML = repeated.map(item => `<span>${item}</span>`).join("");
     }
 
     function renderSpotlight(){
       document.getElementById("spotlight").innerHTML = comics.slice(1,4).map((c, i) => `
         <article class="mini-card" onclick="setHeroByIndex(${i+1})">
           ${imageTag(c.poster || c.cover, c.title, "", c.title)}
-          <div class="mini-overlay">
-            <div>
-              <small>${c.badge} • ${c.chapter}</small>
-              <h3>${c.title}</h3>
-            </div>
+          <div class="mini-content">
+            <small>${c.badge} · ${c.chapter}</small>
+            <h3>${c.title}</h3>
+            <p>${c.desc}</p>
           </div>
         </article>
       `).join("");
@@ -1047,8 +1227,8 @@
             </div>
             <h3>${c.title}</h3>
             <div class="card-info">
-              <span>${c.type} • ${c.genre}</span>
-              <span>★ ${c.rating}</span>
+              <span>${c.type} · ${c.genre}</span>
+              <span>${c.rating}</span>
             </div>
           </article>
         `;
@@ -1064,7 +1244,7 @@
             ${imageTag(c.cover, c.title, "", c.title)}
             <div>
               <h3>${c.title}</h3>
-              <p>${c.type} • ${c.genre}</p>
+              <p>${c.type} · ${c.genre}</p>
               <div class="chapters">
                 <span>${c.chapter} <em>2 jam lalu</em></span>
                 <span>Ch. ${Math.max(1, chap - 1)} <em>1 hari lalu</em></span>
@@ -1086,7 +1266,7 @@
             ${imageTag(c.cover, c.title, "", c.title)}
             <div style="min-width:0">
               <h3>${c.title}</h3>
-              <small>${c.type} • ★ ${c.rating}</small>
+              <small>${c.type} · Rating ${c.rating}</small>
             </div>
           </article>
         `;
